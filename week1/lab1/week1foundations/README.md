@@ -90,6 +90,7 @@ After that, the installation completed successfully.
 ```bash
 python3 -m venv .venv
 ```
+![Virtual Environmemt](screenshots/virtual_env.png)
 
 ---
 
@@ -134,6 +135,7 @@ Name: Palak Grover
 Python Version:
 3.10.12 (main, Jun 22 2026, 18:55:27) [GCC 11.4.0]
 ```
+![Output](screenshots/output_hello.png)
 
 The output confirms that:
 - Python is installed successfully.
@@ -156,6 +158,7 @@ cat requirements.txt
 
 Initially, the file is empty because no third-party packages are installed.
 
+![Empty requirements.txt](screenshots/empty_requirements.png)
 ---
 
 ### 8. Install a Python Package
@@ -176,6 +179,7 @@ pip freeze > requirements.txt
 
 The `requirements.txt` file now contains the installed package and its dependencies.
 
+![Requirements.txt](screenshots/requirements_after_install.png)
 ---
 
 ## Recreate the Environment
