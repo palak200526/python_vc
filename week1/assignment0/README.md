@@ -45,7 +45,7 @@ m3: Movie = {"year": 2004}
 
 - **Python 3.8**
   - The program does not run because `Required` and `NotRequired` are not available in the standard `typing` module.
-  ![Program Output](screenshots/output.png)
+  ![Program Output](output.png)
 
 ## Conclusion
 
