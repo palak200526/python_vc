@@ -7,7 +7,8 @@ This repository contains my Python assignments completed as part of my learning.
 | Assignment | Description |
 |------------|-------------|
 | Assignment 0 | Setup 2 python versions |
-| Assignment 1 | Project and environment setup |
+| Lab 1 | Project and environment setup |
+| Lab 2 | Python Fluency Drills |
 
 ## How to Run
 
