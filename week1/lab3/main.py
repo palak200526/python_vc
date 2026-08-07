@@ -25,3 +25,19 @@ def word_count_counter(text):
 
     return counts
 #print(word_count_counter("Hello, Hello World!"))
+
+# This function takes a list of lists as input and returns a flattened list using a loop
+def flatten_loop(list_of_lists):
+    result = []
+
+    for sublist in list_of_lists:
+        for item in sublist:
+            result.append(item)
+
+    return result
+#print(flatten_loop([[1,2],[3,4],[5]]))
+
+# This function takes a list of lists as input and returns a flattened list using a list comprehension
+def flatten_comp(list_of_lists):
+    return [item for sublist in list_of_lists for item in sublist]
+#print(flatten_comp([[1,2],[3,4],[5]]))
