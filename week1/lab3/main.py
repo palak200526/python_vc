@@ -41,3 +41,24 @@ def flatten_loop(list_of_lists):
 def flatten_comp(list_of_lists):
     return [item for sublist in list_of_lists for item in sublist]
 #print(flatten_comp([[1,2],[3,4],[5]]))
+
+# This function reads a file containing numbers and returns the mean of those numbers. It handles exceptions for file not found and invalid number formats.
+def mean_of_file(path):
+    numbers = []
+
+    try:
+        with open(path, "r") as file:
+            for line in file:
+                try:
+                    numbers.append(float(line.strip()))
+                except ValueError:
+                    pass
+
+        if numbers:
+            return sum(numbers) / len(numbers)
+        return None
+
+    except FileNotFoundError:
+        print("File not found.")
+        return None
+
