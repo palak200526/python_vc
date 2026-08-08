@@ -1,4 +1,8 @@
+# Lab 3 - Python Utility Functions
+# This file contains reusable functions for word counting,
+# list flattening, and calculating the mean of numbers from a file.
 import string
+import logging
 from typing import List, Dict
 from collections import Counter
 
@@ -53,14 +57,17 @@ def mean_of_file(path):
             for line in file:
                 try:
                     numbers.append(float(line.strip()))
-                except ValueError:
-                    pass
-
+                except ValueError as error:
+                    logging.warning(
+                        "Invalid number in line '%s': %s",
+                        line.strip(),
+                        error
+                    )
         if numbers:
             return sum(numbers) / len(numbers)
         return None
 
     except FileNotFoundError:
-        print("File not found.")
+        print(f"File not found: {path}")
         return None
 
