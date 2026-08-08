@@ -50,6 +50,7 @@ main
                     ▼
                   main
 Conventional Commits
+```
 
 Examples of commit messages used in this lab:
 
