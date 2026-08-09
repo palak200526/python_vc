@@ -27,9 +27,7 @@ curl -o alice.txt https://www.gutenberg.org/files/11/11-0.txt
 - `curl` downloads a file from a URL.
 - `-o` specifies the output filename.
 
-### Screenshot
-
-**Add Screenshot:** `screenshots/download.png`
+![Download](screenshots/download.png)
 
 ---
 
@@ -49,9 +47,7 @@ tr -cs '[:alpha:]' '\n' < alice.txt | tr '[:upper:]' '[:lower:]' | sort | uniq -
 - `sort -nr` – Sorts the word counts in descending numerical order.
 - `head` – Displays the top 10 most frequent words.
 
-### Screenshot
-
-**Add Screenshot:** `screenshots/pipeline.png`
+![Pipeline](screenshots/pipeline.png)
 
 ---
 
@@ -76,9 +72,7 @@ wc alice.txt
 - Characters
 - Filename
 
-### Screenshot
-
-**Add Screenshot:** `screenshots/wc.png`
+![Word Count](screenshots/wc.png)
 
 ---
 
@@ -113,9 +107,7 @@ tr -cs '[:alpha:]' '\n' < "$file" \
 - Accepts an optional count.
 - Default count is **10**.
 
-### Screenshot
-
-**Add Screenshot:** `screenshots/script.png`
+![Script](screenshots/script.png)
 
 ---
 
@@ -147,9 +139,7 @@ chmod +x top_words.sh
 ./top_words.sh alice.txt 15
 ```
 
-### Screenshot
-
-**Add Screenshot:** `screenshots/top_words_alice.png`
+![Top Words](screenshots/top_words_alice.png)
 
 ---
 
@@ -173,9 +163,7 @@ or
 ./top_words.sh sherlock.txt 8
 ```
 
-### Screenshot
-
-**Add Screenshot:** `screenshots/top_words_sherlock.png`
+![Top Words SherLock](screenshots/top_words_sherlock.png)
 
 ---
 
