@@ -9,6 +9,9 @@ This repository contains my Python assignments completed as part of my learning.
 | Assignment 0 | Setup 2 python versions |
 | Lab 1 | Project and environment setup |
 | Lab 2 | Python Fluency Drills |
+| Lab 3 | Git and GitHub Workflow |
+| Lab4 | Command Line and Bash |
+| Lab5 | Sql Fundamentals |
 
 ## How to Run
 
