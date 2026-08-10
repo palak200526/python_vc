@@ -21,4 +21,3 @@ git clone <repository-url>
 2. Open the desired assignment folder.
 
 3. Follow the instructions in that assignment's `README.md`.
-
