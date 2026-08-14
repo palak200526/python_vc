@@ -2,7 +2,5 @@
 .venv/
 # Database
 Chinook_SQLite.sqlite
-# Sample Data
-samples/
 # Some Python Notebok
 .ipynb_checkpoints/

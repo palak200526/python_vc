@@ -1,0 +1,9 @@
+Name,Age,City,PurchaseDate,Amount,Category
+Palak,21,Chandigarh,2026-08-01,2500,Furniture
+Rahul,22,Delhi,2026-08-02,1800,Electronics
+Anu,20,Pune,2026-08-03,3200,Furniture
+Riya,,Mumbai,2026-08-04,1500,Electronics
+Aman,23,,2026-08-05,2700,Furniture
+Neha,21,Delhi,,2200,Electronics
+Karan,24,Pune,2026-08-07,,Furniture
+Simran,22,Chandigarh,2026-08-08,1900,Electronics
