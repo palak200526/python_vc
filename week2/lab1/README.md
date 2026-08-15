@@ -93,7 +93,7 @@ import pandas as pd
 
 df = pd.read_excel("business.xlsx")
 ```
-[!read_excel](screenshots/import.png)
+![read_excel](screenshots/import.png)
 
 ## Display the First Five Rows
 
@@ -106,7 +106,7 @@ It provides a quick overview of the dataset and helps us understand the structur
 ```python
 df.head()
 ```
-[!head](screenshots/head.png)
+![head](screenshots/head.png)
 
 ## Display Dataset Information
 
@@ -119,7 +119,7 @@ It displays the column names, number of non-null values, data types, and memory 
 ```python
 df.info()
 ```
-[!info](screenshots/info.png)
+![info](screenshots/info.png)
 
 ## Statistical Summary of the Dataset
 
@@ -132,7 +132,7 @@ It displays values such as count, unique values, most frequent value (`top`), an
 ```python
 df.describe()
 ```
-[!describe](screenshots/describe.png)
+![describe](screenshots/describe.png)
 
 ## Check the Shape of the Dataset
 
@@ -147,7 +147,7 @@ In this dataset, the shape is `(20, 3)`, which means the DataFrame contains **20
 ```python
 df.shape
 ```
-[!shape](screenshots/shape.png)
+![shape](screenshots/shape.png)
 
 ## Task 2: Select Columns and Rows Using loc and iloc and Filter Rows
 
@@ -169,7 +169,7 @@ Specific columns can be selected by providing their column names inside a list.
 ```python
 df[["Footnotes", "Unnamed: 1"]]
 ```
-[!specific columns](screenshots/specific.png)
+![specific columns](screenshots/specific.png)
 
 ## Select Rows and Columns Using loc
 
@@ -180,7 +180,7 @@ The loc method is used to select specific rows and columns using their labels.
 ```python
 df.loc[0:15, ["Footnotes", "Unnamed: 1"]]
 ```
-[!loc](screenshots/loc.png)
+![loc](screenshots/loc.png)
 
 ### Select Rows and Columns Using loc
 
@@ -191,7 +191,7 @@ The loc method is used to select specific rows and columns using their labels.
 ```python
 df.iloc[0:8, 1:3]
 ```
-[!iloc](screenshots/iloc.png)
+![iloc](screenshots/iloc.png)
 
 ## Filter Rows Using a Boolean Condition
 
@@ -203,7 +203,7 @@ Rows can be filtered by applying a Boolean condition to a column.
 df["Footnotes"]= pd.to_numeric(df["Footnotes"], errors="coerce")
 print(df["Footnotes"]>5)
 ```
-[!filter](screenshots/filter.png)
+![filter](screenshots/filter.png)
 
 ## Task 3: Create a New Column Derived from Existing Ones
 
@@ -220,7 +220,7 @@ The dataset is stored in the variable `df`, which will be used for further data 
 ```python
 df = pd.read_csv("student.csv")
 ```
-[!student](screenshots/student.png)
+![student](screenshots/student.png)
 
 ## Create a New Column Derived from Existing Columns
 
@@ -234,7 +234,7 @@ df["Average Grade"] = (
     df["previous_grade"] + df["final_exam_score"]
 ) / 2
 ```
-[!column](screenshots/column.png)
+![column](screenshots/column.png)
 
 ## Task 4: Group by a Categorical Column and Aggregate a Numeric Column
 
@@ -249,7 +249,7 @@ result = df.groupby("part_time_job")["study_time_hours"].agg(["mean", "count"])
 
 print(result)
 ```
-[!Group by](screenshots/groupby.png)
+![Group by](screenshots/groupby.png)
 
 ## Task 5: Merge Two DataFrames on a Key and Confirm the Resulting Row Count
 
@@ -273,7 +273,7 @@ df1 = pd.DataFrame({
 
 print(df1)
 ```
-[!df1](screenshots/df1.png)
+![df1](screenshots/df1.png)
 
 ## Creating a Second DataFrame
 
@@ -291,7 +291,7 @@ df2 = pd.DataFrame({
 
 print(df2)
 ```
-[!df2](screenshots/df2.png)
+![df2](screenshots/df2.png)
 
 ## Merging Two DataFrames
 
@@ -306,7 +306,7 @@ result = pd.merge(df1, df2, on="student_id")
 
 print(result)
 ```
-[!merge](screenshots/merge.png)
+![merge](screenshots/merge.png)
 
 ## Checking Row Counts After Merging
 
@@ -320,7 +320,7 @@ print("df1 rows:", len(df1))
 print("df2 rows:", len(df2))
 print("Merged rows:", len(result))
 ```
-[!count](screenshots/count.png)
+![count](screenshots/count.png)
 
 ## Conclusion
 
