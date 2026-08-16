@@ -254,46 +254,6 @@ Outliers should **not automatically be removed**. They may represent genuine hig
 
 ---
 
-
-# Task 3: Correlation Analysis
-
-Correlation is used to measure the strength and direction of the relationship between numerical variables.
-
-The numerical columns are selected and a correlation matrix is calculated.
-
-```python
-numeric_df = df.select_dtypes(include="number")
-
-correlation = numeric_df.corr()
-
-print(correlation)
-```
-
-A heatmap is used to visualize the correlation matrix.
-
-```python
-sns.heatmap(correlation, annot=True, cmap="coolwarm")
-
-plt.title("Correlation Matrix")
-plt.show()
-```
-
-### Interpretation
-
-The correlation coefficient ranges from **-1 to +1**.
-
-* A value close to **+1** indicates a strong positive relationship.
-* A value close to **-1** indicates a strong negative relationship.
-* A value close to **0** indicates a weak or no linear relationship.
-
-The strongest pair of numerical variables is identified from the correlation matrix.
-
-A strong correlation means that two variables tend to change together. However, **correlation does not prove causation**.
-
-For example, if `Quantity` and `Sales` have a strong positive correlation, it means that transactions with higher quantities tend to have higher sales. It does not prove that quantity alone causes the increase in sales because other factors, such as unit price and product type, can also affect sales.
-
----
-
 # Task 3: Correlation Analysis
 
 Correlation is used to measure the **strength and direction of the relationship** between numerical variables.
