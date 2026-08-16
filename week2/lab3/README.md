@@ -245,15 +245,15 @@ print(df.isna().sum())
 
 > `UNKNOWN` and `ERROR` values were converted to missing values because they do not represent valid observations. Numerical columns were imputed using the median because it is less affected by extreme values, while categorical columns were imputed using the mode. Columns with a high proportion of missing values or where replacing the value could create misleading information were left unchanged.
 
-|Missing-Value | Strategy | Summary|Column	Strategy |	Rationale|
-|Item |	Mode |	Categorical column; | mode provides the most common category|
-|Quantity |	Median |	Numerical column; | median is less affected by extreme values|
-|Price Per Unit |	Median |	Numerical column; | median provides a robust estimate|
-|Total Spent |	Median |	Numerical column; | median is less sensitive to extreme values|
-|Payment Method |	Mode	| Categorical column; | mode provides a consistent replacement|
-|Location	| Leave unchanged	| Missing location cannot be reliably inferred|
-|Transaction Date	| Convert to datetime and leave invalid values missing |	An incorrect date would introduce misleading information|
-
+| Missing-Value Column | Strategy | Rationale |
+|---|---|---|
+| Item | Mode | Categorical column; mode provides the most common category. |
+| Quantity | Median | Numerical column; median is less affected by extreme values. |
+| Price Per Unit | Median | Numerical column; median provides a robust estimate. |
+| Total Spent | Median | Numerical column; median is less sensitive to extreme values. |
+| Payment Method | Mode | Categorical column; mode provides a consistent replacement. |
+| Location | Leave unchanged | Missing location cannot be reliably inferred. |
+| Transaction Date | Convert to datetime and leave invalid values missing | An incorrect date would introduce misleading information. |
 ### Result
 
 The dataset was cleaned by identifying invalid `UNKNOWN` and `ERROR` values, converting them to missing values, and applying an appropriate missing-value strategy to each relevant column. The final dataset is now ready for further analysis.
