@@ -241,7 +241,7 @@ Test access to the S3 input directory:
 ```bash
 aws s3 ls s3://csvstatpractice/input/
 ```
-[!Input](screenshots/input.png)
+![Input](screenshots/input.png)
 
 Example:
 
