@@ -15,7 +15,7 @@ The main objective of this extension is to run `csvstat` on an **Amazon EC2 inst
           │                     │
           ▼                     │
      Amazon S3                  │
-   csvstatpractice              │
+   csvstat-assignment              │
           │                     │
      ┌────┴─────┐               │
      │          │               │
@@ -68,7 +68,7 @@ Amazon S3 is used as the storage layer for input CSV files and generated reports
 ### Current Bucket
 
 ```text
-csvstatpractice
+csvstat-assignment
 ```
 
 ### AWS Region
@@ -80,7 +80,7 @@ ap-south-1
 ### S3 Structure
 
 ```text
-s3://csvstatpractice/
+s3://csvstat-assignment/
 │
 ├── input/
 │   └── test1.csv
@@ -95,7 +95,7 @@ s3://csvstatpractice/
 CSV files are stored in:
 
 ```text
-s3://csvstatpractice/input/
+s3://csvstat-assignment/input/
 ```
 
 ### Output
@@ -103,7 +103,7 @@ s3://csvstatpractice/input/
 Generated reports are stored in:
 
 ```text
-s3://csvstatpractice/output/
+s3://csvstat-assignment/output/
 ```
 
 ---
@@ -115,7 +115,7 @@ The EC2 instance accesses S3 using an **IAM instance profile**.
 ### IAM Role
 
 ```text
-csvstat-ec2
+ec2Assignment
 ```
 
 The role provides the permissions required by the application to interact with the S3 bucket.
@@ -130,24 +130,32 @@ This provides a more secure approach than hardcoding AWS credentials inside the 
 
 # IAM Permissions
 
-The AWS account used during setup contains IAM policies for administrative and AWS management operations.
+The EC2 instance uses an **IAM instance profile** with the role `ec2Assignment`.
 
-The IAM user permissions shown during the AWS setup include:
+The role follows the principle of least privilege and provides only the S3 permissions required by the application.
+
+Required permissions:
 
 ```text
-AdministratorAccess
-AmazonS3FullAccess
-IAMUserChangePassword
+s3:ListBucket
+s3:GetObject
+s3:PutObject
 ```
 
-These permissions belong to the IAM user used for AWS management and are separate from the csvstat-ec2 IAM role attached to the EC2 instance.
+The permissions are restricted to:
 
-AWS credentials should never be hardcoded in:
+```text
+s3:ListBucket
+    → arn:aws:s3:::csvstat-assignment
 
-* Python source code
-* `.env` files
-* GitHub repositories
-* Configuration files
+s3:GetObject
+    → arn:aws:s3:::csvstat-assignment/input/*
+
+s3:PutObject
+    → arn:aws:s3:::csvstat-assignment/output/*
+```
+
+The EC2 instance does not use hardcoded AWS access keys or secret keys. Boto3 obtains temporary credentials through the attached IAM instance profile.
 
 ---
 
@@ -164,7 +172,7 @@ pip3 install -r requirements.txt
 The `requirements.txt` file contains:
 
 ```text
-boto3
+boto3==1.42.97
 ```
 
 Boto3 is responsible for communicating with Amazon S3.
@@ -180,7 +188,7 @@ The application uses the EC2 IAM instance profile to authenticate with AWS.
 For Amazon Linux:
 
 ```bash
-ssh -i csv.pem ec2-user@16.16.79.20
+ssh -i <key-file>.pem ec2-user@13.203.231.253>
 ```
 ![Ec2](screenshots/ec2.png)
 
@@ -206,7 +214,7 @@ pip3 install -r requirements.txt
 ## 5. Clone the Repository
 
 ```bash
-git clone https://github.com/palak200526/python_vc
+git clone <repository-url>
 ```
 ![Clone](screenshots/clone.png)
 
@@ -219,7 +227,7 @@ cd python_vc
 Navigate to the directory containing `csvstat.py`:
 
 ```bash
-cd week1/challenge1
+cd python_vc/week2/aws
 ```
 ![Directory](screenshots/directory.png)
 
@@ -234,12 +242,12 @@ aws sts get-caller-identity
 ```
 ![Identiy](screenshots/aws_identity.png)
 
-The response should show the `csvstat-ec2` IAM role.
+The response should show the `ec2Assignment` IAM role.
 
 Test access to the S3 input directory:
 
 ```bash
-aws s3 ls s3://csvstatpractice/input/
+aws s3 ls s3://csvstat-assignment/input/
 ```
 ![Input](screenshots/input.png)
 
@@ -252,7 +260,7 @@ test1.csv
 Test the output directory:
 
 ```bash
-aws s3 ls s3://csvstatpractice/output/
+aws s3 ls s3://csvstat-assignment/output/
 ```
 
 ---
@@ -264,7 +272,7 @@ The application accepts an S3 URI as input.
 Example:
 
 ```bash
-python3 csvstat.py s3://csvstatpractice/input/test1.csv
+python3 csvstat.py s3://csvstat-assignment/input/test1.csv
 ```
 ![Run Python](screenshots/run_python.png)
 
@@ -288,7 +296,7 @@ Example output:
 
 ```text
 Report uploaded to:
-s3://csvstatpractice/output/report_20260817_165850.json
+s3://csvstat-assignment/output/report_20260817_165850.json
 ```
 
 ---
@@ -300,8 +308,8 @@ Reports are stored in the S3 `output/` prefix.
 Example:
 
 ```text
-s3://csvstatpractice/output/report_20260817_165850.json
-s3://csvstatpractice/output/report_20260817_165950.json
+s3://csvstat-assignment/output/report_20260817_165850.json
+s3://csvstat-assignment/output/report_20260817_165950.json
 ```
 ![Output](screenshots/output.png)
 
@@ -314,7 +322,7 @@ A timestamp is included in the filename so that every execution creates a new re
 After running the application:
 
 ```bash
-aws s3 ls s3://csvstatpractice/output/
+aws s3 ls s3://csvstat-assignment/output/
 ```
 
 Example:
@@ -327,7 +335,7 @@ Example:
 A generated report can also be downloaded for verification:
 
 ```bash
-aws s3 cp s3://csvstatpractice/output/REPORT_NAME.json .
+aws s3 cp s3://csvstat-assignment/output/REPORT_NAME.json .
 ```
 
 ---

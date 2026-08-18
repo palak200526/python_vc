@@ -7,7 +7,7 @@ from datetime import datetime
 from collections import Counter
 
 
-BUCKET_NAME = "csvstatpractice"
+BUCKET_NAME = "csvstat-assignment"
 OUTPUT_PREFIX = "output/"
 
 s3 = boto3.client("s3")
@@ -97,7 +97,7 @@ def main():
 
     # Validate S3 path
     if not args.file.startswith("s3://"):
-        parser.error("Input must be an S3 URI, e.g. s3://csvstatpractice/input/test1.csv")
+        parser.error("Input must be an S3 URI, e.g. s3://csvstat-assignment/input/test1.csv")
 
     s3_path = args.file[5:]
     bucket, key = s3_path.split("/", 1)
