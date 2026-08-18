@@ -1,7 +1,0 @@
-Product,Units,SaleDate,Region,Revenue
-A,101.0,2026-07-01,North,500.5
-B,102.0,2026-07-02,South,750.0
-C,,2026-07-03,North,300.25
-D,104.0,,West,1200.0
-E,105.0,2026-07-05,North,
-F,106.0,2026-07-06,South,450.75

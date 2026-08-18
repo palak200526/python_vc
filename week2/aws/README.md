@@ -6,6 +6,40 @@ The main objective of this extension is to run `csvstat` on an **Amazon EC2 inst
 
 ---
 
+# Project Objective
+
+The objective of this project is to demonstrate how a Python application can be deployed and executed on an AWS EC2 instance while using Amazon S3 as cloud storage.
+
+The complete workflow is:
+
+```text
+CSV File
+   │
+   ▼
+Amazon S3
+input/
+   │
+   │ GetObject
+   ▼
+Amazon EC2
+   │
+   │ csvstat.py
+   ▼
+Process CSV
+   │
+   ▼
+Generate JSON Report
+   │
+   │ PutObject
+   ▼
+Amazon S3
+output/
+```
+
+Each execution generates a new timestamped report so that previous reports are not overwritten.
+
+---
+
 ## AWS Architecture
 
 ```text
@@ -43,6 +77,30 @@ Read CSV → Process → Generate Report
 7. Each execution generates a unique timestamped report.
 
 ---
+#  Prerequisites
+
+Before starting, make sure you have:
+
+* An AWS account
+* An AWS region selected
+* An Amazon S3 bucket
+* An Amazon EC2 instance
+* An IAM role for EC2
+* An IAM instance profile attached to the EC2 instance
+* Python 3
+* pip
+* Git
+* AWS CLI
+* The GitHub repository containing this project
+* A CSV file for testing
+
+This guide uses:
+
+```text
+AWS Region: ap-south-1
+```
+
+---
 
 # AWS Services Used
 
@@ -61,72 +119,6 @@ The EC2 instance is responsible for:
 
 ---
 
-## Amazon S3
-
-Amazon S3 is used as the storage layer for input CSV files and generated reports.
-
-### Current Bucket
-
-```text
-csvstat-assignment
-```
-
-### AWS Region
-
-```text
-ap-south-1
-```
-
-### S3 Structure
-
-```text
-s3://csvstat-assignment/
-│
-├── input/
-│   └── test1.csv
-│
-└── output/
-    ├── report_20260817_165850.json
-    └── report_20260817_165950.json
-```
-
-### Input
-
-CSV files are stored in:
-
-```text
-s3://csvstat-assignment/input/
-```
-
-### Output
-
-Generated reports are stored in:
-
-```text
-s3://csvstat-assignment/output/
-```
-
----
-
-# IAM Instance Profile
-
-The EC2 instance accesses S3 using an **IAM instance profile**.
-
-### IAM Role
-
-```text
-ec2Assignment
-```
-
-The role provides the permissions required by the application to interact with the S3 bucket.
-
-The application does **not** store AWS access keys or secret keys.
-
-Boto3 obtains temporary credentials automatically through the EC2 instance profile.
-
-This provides a more secure approach than hardcoding AWS credentials inside the application.
-
----
 
 # IAM Permissions
 
@@ -145,14 +137,26 @@ s3:PutObject
 The permissions are restricted to:
 
 ```text
-s3:ListBucket
-    → arn:aws:s3:::csvstat-assignment
-
-s3:GetObject
-    → arn:aws:s3:::csvstat-assignment/input/*
-
-s3:PutObject
-    → arn:aws:s3:::csvstat-assignment/output/*
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::csvstat-assignment"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::csvstat-assignment/input/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::csvstat-assignment/output/*"
+    }
+  ]
+}
 ```
 
 The EC2 instance does not use hardcoded AWS access keys or secret keys. Boto3 obtains temporary credentials through the attached IAM instance profile.
@@ -181,165 +185,240 @@ The application uses the EC2 IAM instance profile to authenticate with AWS.
 
 ---
 
-# EC2 Setup
+# Environment Versions
 
-## 1. Connect to EC2
+The application was tested using the following environment:
 
-For Amazon Linux:
-
-```bash
-ssh -i <key-file>.pem ec2-user@13.203.231.253>
+```text
+Python: 3.9.25
+pip: 21.3.1
+Git: 2.50.1
+Boto3: 1.42.97
+AWS Region: ap-south-1
 ```
-![Ec2](screenshots/ec2.png)
-
-## 2. Verify Python
-
-```bash
-python3 --version
-```
-
-## 3. Verify Git
-
-```bash
-git --version
-```
-## 4. Install Dependencies
-
-```bash
-pip3 install -r requirements.txt
-```
-
-![Version](screenshots/python_version.png)
-
-## 5. Clone the Repository
-
-```bash
-git clone <repository-url>
-```
-![Clone](screenshots/clone.png)
-
-Navigate to the project directory:
-
-```bash
-cd python_vc
-```
-
-Navigate to the directory containing `csvstat.py`:
-
-```bash
-cd python_vc/week2/aws
-```
-![Directory](screenshots/directory.png)
-
 ---
 
-# Verify IAM Access
 
-Verify the IAM identity attached to the EC2 instance:
+# AWS EC2 & S3 Setup
 
-```bash
-aws sts get-caller-identity
+## 1. Create the S3 Bucket
+
+Go to **AWS Console → S3 → Create bucket**.
+
+Configure:
+
+* **Bucket name:** `csvstat-assignment`
+* **Region:** `ap-south-1`
+* Keep other settings as default.
+
+The bucket will be:
+
+```text
+s3://csvstat-assignment/
 ```
-![Identiy](screenshots/aws_identity.png)
+![Bucket](screenshots/bucket.png)
 
-The response should show the `ec2Assignment` IAM role.
+## 2. Create S3 Folders
 
-Test access to the S3 input directory:
+Inside the bucket, create:
+
+```text
+csvstat-assignment/
+├── input/
+└── output/
+```
+
+* `input/` → CSV files
+* `output/` → Generated JSON reports
+
+![Input Output](screenshots/input_output_bucket.png)
+
+## 3. Upload CSV File
+
+Upload `test1.csv` to the `input/` folder.
+
+```text
+s3://csvstat-assignment/input/test1.csv
+```
+
+Verify using:
 
 ```bash
 aws s3 ls s3://csvstat-assignment/input/
 ```
 ![Input](screenshots/input.png)
 
-Example:
+## 4. Create IAM Policy
+
+Go to **IAM → Policies → Create policy → JSON** and add:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::csvstat-assignment"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::csvstat-assignment/input/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::csvstat-assignment/output/*"
+    }
+  ]
+}
+```
+
+Create it as:
+
+```text
+csvstat-s3-access
+```
+![IAM Policies](screenshots/iam_policies.png)
+
+## 5. Create IAM Role
+
+Go to **IAM → Roles → Create role**.
+
+* Trusted entity: **AWS service**
+* Use case: **EC2**
+* Attach: `csvstat-s3-access`
+* Role name: `ec2Assignment`
+
+The EC2 instance uses this role to access S3 without storing AWS access keys.
+![IAM Role](screenshots/iam_role.png)
+
+## 6. Launch EC2 Instance
+
+Go to **EC2 → Instances → Launch instance**.
+
+Configure:
+
+* **Name:** `csvstat-ec2`
+* **AMI:** Amazon Linux
+* **Instance type:** suitable/free-tier eligible instance
+* **Key pair:** create/select a `.pem` key
+* **SSH:** allow from **My IP**
+* **IAM role:** `ec2Assignment`
+
+Launch the instance.
+![Instance](screenshots/instance.png)
+
+## 7. Connect to EC2
+
+After the instance is running:
+
+```bash
+ssh -i <key-file>.pem ec2-user@<EC2_PUBLIC_IP>
+```
+![ec2](screenshots/ec2.png)
+
+Verify the environment:
+
+```bash
+python3 --version
+pip3 --version
+git --version
+aws --version
+```
+![Version](screenshots/python_version.png)
+
+## 8. Clone the Project
+
+```bash
+git clone https://github.com/palak200526/python_vc.git
+cd python_vc/week2/aws
+```
+![Clone](screenshots/clone.png)
+
+Verify:
+
+```bash
+ls
+```
+
+Expected files:
+
+```text
+csvstat.py
+requirements.txt
+README.md
+```
+
+## 9. Install Dependencies
+
+```bash
+pip3 install -r requirements.txt
+```
+
+`requirements.txt` contains:
+
+```text
+boto3==1.42.97
+```
+
+## 10. Verify IAM Authentication
+
+Run:
+
+```bash
+aws sts get-caller-identity
+```
+![Authentication](screenshots/aws_identity.png)
+
+The response should show the `ec2Assignment` assumed role.
+
+## 11. Verify S3 Access
+
+```bash
+aws s3 ls s3://csvstat-assignment/input/
+```
+
+Expected:
 
 ```text
 test1.csv
 ```
+![Input](screenshots/input.png)
 
-Test the output directory:
-
-```bash
-aws s3 ls s3://csvstat-assignment/output/
-```
-
----
-
-# Running the Application
-
-The application accepts an S3 URI as input.
-
-Example:
+## 12. Run csvstat
 
 ```bash
 python3 csvstat.py s3://csvstat-assignment/input/test1.csv
 ```
-![Run Python](screenshots/run_python.png)
 
-The application follows this workflow:
-
-```text
-S3 Input
-   ↓
-Read CSV
-   ↓
-Process CSV
-   ↓
-Generate Report
-   ↓
-Upload Report
-   ↓
-S3 Output
-```
-
-Example output:
+The application:
 
 ```text
-Report uploaded to:
-s3://csvstat-assignment/output/report_20260817_165850.json
+S3 → Read CSV → Process → Generate JSON → Upload to S3
 ```
 
----
-
-# Generated Reports
-
-Reports are stored in the S3 `output/` prefix.
-
-Example:
+The report is uploaded to:
 
 ```text
-s3://csvstat-assignment/output/report_20260817_165850.json
-s3://csvstat-assignment/output/report_20260817_165950.json
+s3://csvstat-assignment/output/
 ```
-![Output](screenshots/output.png)
 
-A timestamp is included in the filename so that every execution creates a new report instead of overwriting the previous one.
-
----
-
-# Verification
-
-After running the application:
+## 13. Verify Output
 
 ```bash
 aws s3 ls s3://csvstat-assignment/output/
 ```
+![Output](screenshots/output.png)
 
 Example:
 
 ```text
-2026-08-17 16:58:51  1699 report_20260817_165850.json
-2026-08-17 16:59:51  1699 report_20260817_165950.json
+report_20260817_165850.json
 ```
 
-A generated report can also be downloaded for verification:
-
-```bash
-aws s3 cp s3://csvstat-assignment/output/REPORT_NAME.json .
-```
-
----
-
+This confirms that the application successfully reads the CSV from S3 and uploads the generated JSON report back to S3.
 
 # Conclusion
 
