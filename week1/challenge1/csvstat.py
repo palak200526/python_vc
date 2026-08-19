@@ -1,7 +1,27 @@
+"""
+CSVStat: A command-line tool for profiling CSV files.
+
+The tool reports dataset dimensions, column types,
+missing values, numeric statistics, and frequent values.
+"""
+
+
+# Used to parse command-line arguments.
 import argparse
+
+# Used to read and process CSV files.
 import csv
+
+# Used to parse and validate date values.
 from datetime import datetime
+
+# Used to count the frequency of values in a column.
 from collections import Counter  
+
+
+TYPE_NUMERIC = "numeric"
+TYPE_DATE = "date"
+TYPE_TEXT = "text"
 
 
 def is_numeric(value):
@@ -26,6 +46,7 @@ def is_date(value):
             datetime.strptime(value, date_format)
             return True
         except ValueError:
+            print(f"'{value}' is not in {date_format} format.")
             continue
 
     return False
@@ -34,7 +55,6 @@ def is_date(value):
 def infer_type(values):
     """Infer whether a column is numeric, date, or text."""
 
-    # Remove missing values
     values = [
         value.strip()
         for value in values
@@ -42,15 +62,16 @@ def infer_type(values):
     ]
 
     if not values:
-        return "text"
+        return TYPE_TEXT
 
     if all(is_numeric(value) for value in values):
-        return "numeric"
+        return TYPE_NUMERIC
 
     if all(is_date(value) for value in values):
-        return "date"
+        return TYPE_DATE
+    print("Values do not match numeric or date format.") 
+    return TYPE_TEXT
 
-    return "text"
 
 def numeric_stats(values):
     """Calculate min, mean, and max for numeric values."""
@@ -82,7 +103,7 @@ def main():
 
     args = parser.parse_args()
     if args.top < 1:
-        parser.error("--top must be a positive integer")
+        parser.error("--top must be greater than or equal to 1")
 
     try:
         with open(
@@ -131,13 +152,13 @@ def main():
             f"  Missing percentage: "
             f"{missing_percentage:.2f}%"
         )
-        if column_type == "numeric":
+        if column_type == TYPE_NUMERIC:
             minimum, mean, maximum = numeric_stats(values)
 
             print(f"  Min: {minimum}")
             print(f"  Mean: {mean:.2f}")
             print(f"  Max: {maximum}")
-        if column_type == "text":
+        if column_type == TYPE_TEXT:
             text_values = [
                 value.strip()
                 for value in values

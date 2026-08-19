@@ -40,7 +40,7 @@ This project contains two parts:
 - `collections.Counter`
 - SQLite
 
-The project uses only the Python standard library. No external Python packages are required.
+The project uses only the Python standard library. No external Python libraries are required.
 
 ---
 
