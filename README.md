@@ -2,14 +2,31 @@
 # Python Assignments
 
 This repository contains my Python assignments completed as part of my learning. Each assignment is organized into its own folder with a dedicated `README.md` describing the objective, implementation, and execution steps.
-## Assignments
 
-| Assignment | Description |
-|------------|-------------|
-| Assignment 0 | Setup 2 python versions |
-| Lab 1 | Project and environment setup |
+## Repository Structure
+### Week 1
+
+| Folder | Description |
+|--------|-------------|
+| Assignment 0 | Setup of two Python versions |
+| Lab 1 | Python project and environment setup |
 | Lab 2 | Python Fluency Drills |
-| Challenge 1 | 
+| Lab 3 | Git and GitHub Workflow |
+| Lab 4 | Command Line and Bash |
+| Lab 5 | Visualization and Mini-EDA |
+
+### Week 2
+
+| Folder | Description |
+|--------|-------------|
+| DataProcessing | Data processing work |
+| AWS | AWS-related work |
+| Lab 1 | Pandas Fundamental |
+| Lab 2 | Numpy and Vectorization |
+| Lab 3 | Data Cleaning |
+| Lab 4 | Statistics Intuition |
+| Lab 5 | Visualization and Mini EDA |
+>>>>>>> origin/main
 
 ## How to Run
 

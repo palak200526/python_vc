@@ -1,0 +1,52 @@
+Rows: 8
+Columns: 6
+
+Name:
+  Type: text
+  Missing: 0
+  Missing percentage: 0.00%
+  Top 5 values:
+    Palak: 1
+    Rahul: 1
+    Anu: 1
+    Riya: 1
+    Aman: 1
+
+Age:
+  Type: numeric
+  Missing: 1
+  Missing percentage: 12.50%
+  Min: 20.0
+  Mean: 21.86
+  Max: 24.0
+
+City:
+  Type: text
+  Missing: 1
+  Missing percentage: 12.50%
+  Top 5 values:
+    Chandigarh: 2
+    Delhi: 2
+    Pune: 2
+    Mumbai: 1
+
+PurchaseDate:
+  Type: date
+  Missing: 1
+  Missing percentage: 12.50%
+
+Amount:
+  Type: numeric
+  Missing: 1
+  Missing percentage: 12.50%
+  Min: 1500.0
+  Mean: 2257.14
+  Max: 3200.0
+
+Category:
+  Type: text
+  Missing: 0
+  Missing percentage: 0.00%
+  Top 5 values:
+    Furniture: 4
+    Electronics: 4

@@ -97,7 +97,7 @@ The first query retrieves customers from a specified country.
 
 The `.schema Customer` command displays the structure and columns of the `Customer` table.
 
-![Customer Schema](screenshots/customer_schema.png)
+![Customer Schema](screenshots/customer_schemas.png)
 
 ### SQL Query
 
@@ -137,7 +137,7 @@ The second query identifies the 10 tracks with the highest unit price.
 
 The `.schema Track` command displays the structure and columns of the `Track` table.
 
-![Track Schema](screenshots/track_schema.png)
+![Track Schema](screenshots/track_schemas.png)
 
 ### SQL Query
 
