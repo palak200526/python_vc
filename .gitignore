@@ -1,2 +1,4 @@
 # Virtual Environment
 .venv/
+# Database
+Chinook_SQLite.sqlite

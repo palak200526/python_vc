@@ -26,6 +26,7 @@ This repository contains my Python assignments completed as part of my learning.
 | Lab 3 | Data Cleaning |
 | Lab 4 | Statistics Intuition |
 | Lab 5 | Visualization and Mini EDA |
+>>>>>>> origin/main
 
 ## How to Run
 
@@ -38,4 +39,3 @@ git clone <repository-url>
 2. Open the desired assignment folder.
 
 3. Follow the instructions in that assignment's `README.md`.
-

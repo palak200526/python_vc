@@ -13,8 +13,11 @@
 
 ---
 
+<<<<<<< HEAD
+=======
 ---
 
+>>>>>>> origin/main
 ## Technologies & Libraries
 
 - Python
@@ -26,6 +29,11 @@
 
 ---
 
+<<<<<<< HEAD
+---
+
+=======
+>>>>>>> origin/main
 ## Repository Structure
 
 ```text
@@ -44,9 +52,15 @@ week2/
 ├── README.md
 └── .gitignore
 ```
+<<<<<<< HEAD
+
+---
+
+=======
 ---
 
 
+>>>>>>> origin/main
 # JupyterLab Setup
 
 ## Installation
@@ -55,6 +69,21 @@ To install JupyterLab, open **Command Prompt (CMD)** or **PowerShell** and run:
 
 1. Install JupyterLab:
 
+<<<<<<< HEAD
+   ```bash
+   pip install jupyterlab
+   ```
+2. Navigate to the project directory:
+
+   ```bash
+   cd C:\Users\palak\python_Vc
+   ```
+3. Start JupyterLab:
+
+   ```bash
+   python -m jupyterlab
+   ```
+=======
    ```bash
    pip install jupyterlab
    ```
@@ -68,6 +97,7 @@ To install JupyterLab, open **Command Prompt (CMD)** or **PowerShell** and run:
    ```bash
    python -m jupyterlab
    ```
+>>>>>>> origin/main
 4. JupyterLab will open in your browser.
 
 # KDE (Kernel Density Estimation)
@@ -87,6 +117,17 @@ These individual curves are then combined to create one **overall density curve*
 * **Multiple peaks** → May indicate different groups or patterns in the data.
 * **Bandwidth** → Controls the smoothness of the KDE curve.
 
+<<<<<<< HEAD
+
+## KDE vs Histogram
+
+| **Histogram**                          | **KDE (Kernel Density Estimation)**     |
+| -------------------------------------- | --------------------------------------- |
+| Divides data into **bins**             | Creates a **smooth density curve**      |
+| Depends on **bin size**                | Depends on **bandwidth**                |
+| Shows **frequency/counts**             | Shows **estimated probability density** |
+| Less smooth and can look discontinuous | Smooth and continuous                   |
+=======
 ## KDE vs Histogram
 
 | **Histogram**                          | **KDE (Kernel Density Estimation)**     |
@@ -95,6 +136,7 @@ These individual curves are then combined to create one **overall density curve*
 | Depends on **bin size**                | Depends on **bandwidth**                |
 | Shows **frequency/counts**             | Shows **estimated probability density** |
 | Less smooth and can look discontinuous | Smooth and continuous                   |
+>>>>>>> origin/main
 
 # Normal Distribution Properties
 
@@ -142,11 +184,13 @@ A larger standard deviation produces a wider and flatter distribution, while a s
 
 One of the most important properties of a normal distribution is the **Empirical Rule**:
 
+
 | Range  | Approx. Data |
 | ------ | -----------: |
 | μ ± 1σ |      **68%** |
 | μ ± 2σ |      **95%** |
 | μ ± 3σ |    **99.7%** |
+
 
 For example, if the **mean = 50** and **standard deviation = 10**:
 
@@ -168,6 +212,10 @@ A normal distribution has **one peak**, which represents the mode.
 
 # Interquartile Range in Statistics
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/main
 The *Interquartile Range (IQR)* tells us how spread out the middle 50% of the data is. It is less affected by extreme values and gives a better idea of how tightly or loosely the central data points are grouped. It is calculated using the first quartile (Q1) and third quartile (Q3).
 
 ## Key Features of IQR
@@ -259,9 +307,15 @@ For one-variable data, a run sequence or histogram is considered necessary. For 
 
 Install Pandas using:
 
+<<<<<<< HEAD
+    ```bash
+        pip install pandas
+    ```
+=======
     ```bash
         pip install pandas
     ```
+>>>>>>> origin/main
 
 ---
 
@@ -332,37 +386,65 @@ NumPy arrays are mainly used for **storing and performing calculations on numeri
 ### 1. KDE
 Learn about Kernel Density Estimation and practice creating KDE plots.
 
+<<<<<<< HEAD
+ [Open KDE Notebook](notebook/kde.ipynb)
+=======
  [Open KDE Notebook](notebook/kde.ipynb)
+>>>>>>> origin/main
 
 ### 2. Normal Distribution
 Practice generating and visualizing normally distributed data.
 
+<<<<<<< HEAD
+ [Open Normal Distribution Notebook](notebook/distribution.ipynb)
+=======
  [Open Normal Distribution Notebook](notebook/distribution.ipynb)
+>>>>>>> origin/main
 
 ### 3. IQR
 Practice calculating Q1, Q3, IQR and identifying outliers.
 
+<<<<<<< HEAD
+ [Open IQR Notebook](notebook/iqr.ipynb)
+=======
  [Open IQR Notebook](notebook/iqr.ipynb)
+>>>>>>> origin/main
 
 ### 4. Contour Plots
 Practice creating contour plots and visualizing relationships between variables.
 
+<<<<<<< HEAD
+ [Open Contour Plot Notebook](notebook/contour.ipynb)
+=======
  [Open Contour Plot Notebook](notebook/contour.ipynb)
+>>>>>>> origin/main
 
 ### 5. Pandas
 Practice DataFrame creation, data manipulation and basic analysis.
 
+<<<<<<< HEAD
+ [Open Pandas Notebook](notebook/pandas.ipynb)
+=======
  [Open Pandas Notebook](notebook/pandas.ipynb)
+>>>>>>> origin/main
 
 ### 6. NumPy
 Practice NumPy arrays, mathematical operations and random data generation.
 
+<<<<<<< HEAD
+ [Open NumPy Notebook](notebook/numpy.ipynb)
+=======
  [Open NumPy Notebook](notebook/numpy.ipynb)
+>>>>>>> origin/main
 
 ### 7. EDA
 Practice performing Exploratory Data Analysis on a dataset.
 
+<<<<<<< HEAD
+ [Open EDA Notebook](notebook/eda.ipynb)
+=======
  [Open EDA Notebook](notebook/eda.ipynb)
+>>>>>>> origin/main
 
 ---
 
@@ -374,10 +456,19 @@ The practical notebooks use the Wine Quality dataset:
 
 ---
 
+<<<<<<< HEAD
+=======
 ---
 
+>>>>>>> origin/main
 ## Conclusion
 
 Week 2 focused on building a strong foundation in data analysis and Exploratory Data Analysis (EDA). I learned how to work with NumPy and Pandas, understand data distributions using KDE and normal distribution concepts, detect outliers using IQR, and visualize relationships using contour plots. I also applied these concepts practically through Jupyter notebooks and the Wine Quality dataset.
 
+<<<<<<< HEAD
 These concepts provide a foundation for understanding datasets, identifying patterns and anomalies, and preparing data for further analysis and machine learning.
+
+---
+=======
+These concepts provide a foundation for understanding datasets, identifying patterns and anomalies, and preparing data for further analysis and machine learning.
+>>>>>>> origin/main
